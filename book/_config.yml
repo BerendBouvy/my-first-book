@@ -11,6 +11,9 @@ html:
   favicon : "figures/favicon.ico"
   baseurl :  "https://teachbooks.github.io/template/" #Replace this with your own URL
 
+launch_buttons:
+  thebe: true
+
 sphinx:
   config:
     html_js_files:
