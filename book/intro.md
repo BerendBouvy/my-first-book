@@ -1,6 +1,6 @@
 (intro)=
-# Welcome to the Template Book
+# Welcome to the revised Time Series chapter
 
-_Write book intro here. This is the first page the student will see when opening the url._
+_This chapter is revised by Berend Bouvy in preparation for the 2024 MUDE course_
 
-This book can be used as a template for other books. It includes a starter package of the software developed by the TeachBooks initiative.
+For any remarks please contact b.n.bouvy@student.tudelft.nl
