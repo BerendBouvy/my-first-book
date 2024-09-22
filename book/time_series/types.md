@@ -1,65 +1,6 @@
-(timetypes)=
-# Types of time series
-
-Time series can be classified based on different properties. Thus, let us start by distinguishing the different types of time series we can find.
-
-### Continuous vs discrete
-
-When observations are made continuously through time, that gives rise to a **continuous** time series.
-
-In practice, we deal with **discrete** time series, since observations are taken only at specific time instances. They are usually equally spaced, even the measured variable can in
-principle be a continuous variable.
-
-
-```{note}
-In this course, we will only focus on **discrete** time series, with a focus on continuous modelling.
-```
-
-### Parametric vs non-parametric
-
-**Parametric** time series analysis consist of a trend, signal and noise. We can apply estimation theory to estimate the trend and signal, for which we need the functional model, while also taking into account the noise via the stochastic model (see [Chapter Observation Theory](OT)).
-
-For **non-parametric time series analysis** we need data-driven methods, such as:
-  * Singular spectrum analysis (SSA)
-  * Wavelet transform
-  * Machine learning methods
-
-```{note}
-Here, we will only take a deeper look to parametric time series!
-```
-
-### Univariate vs multivariate
-
-We call a time series **univariate** when only a single sequence of data is analyzed. Usually we study the time evolution of that one single variable!
-
-On the other hand, it can be useful to consider a **multivariate** time series - several sets of data for the same sequence of time periods are analyzed. As an example, we can look at the figure {numref}`pollution_concentration` here presented that describes the evolution of pollution concentration, which is a function of all the other variables plotted (e.g. dew, temperature, pressure, wind direction, etc.).
-
-```{note}
-We will mainly focus on univariate time series analysis from here on!
-```
-
-```{figure} ./figs/pollution_concentration.png
-:name: pollution-concentration
-:width: 600px
-:align: center
-
-Multivariate time series of pollution concentration (top) as a function of itself and other time series such as dew, temperature, pressure, wind direction, etc.
-```
-
-### Static vs dynamic
-
-When analyzing time series, prediction and analysis of events can be performed in two different ways:
-
-* Sequentially in a **recursive form**, called dynamic mode.
-* In a **batch form**, the so-called static mode.
-
-**Static mode** can be considered when the standard least-squares method can be used to estimate time-invariant parameters, for example velocity.
-
-On the other hand, the **dynamic mode** can be considered when dynamic least-squares (e.g. Kalman filter) is used to study and estimate time-varying parameters.
-
-```{note}
-We will only focus on static time series from here on!
-```
+(noiseandstoch)=
+# Noise and stochastic model
+In the previous section you have learned about the different components that can be present in a time series. Removing all these component, i.e. the functional model, we will be left with the residual term $\epsilon(t)$. In this section we will take a closer look at the differences between signal and noise, and introduce other types of noise than the traditional white noise.
 
 ## Additional concepts
 
@@ -77,7 +18,7 @@ How can we describe both signal and noise?
 
 * **Noise** - random and undesired fluctuation that interferes with the signal: stochastic process are needed to describe this. Parts of the time-correlated noise  needs to be accounted for in prediction, see later {ref}`ARMA`. 
 
-The example in {numref}`signal_noise` shows that the *signal* can be described by $\cos(2\pi t f + \phi)$, where frequency $f$ and phase $\phi$ may be the unknown parameters of interest. The stochastic model (assuming independent observations) would be a scaled identity matrix with variance equal to 1 (middle panel) and 3 (bottom panel), respectively. The signal of interest has been entirely hidden in the background noise in the bottom panel. {ref}`psd` and {ref}`LS-HE` can be used to detect the frequency.
+The example in {numref}`signal_noise` shows that the *signal* can be described by $\cos(2\pi t f + \phi)$, where frequency $f$ and phase $\phi$ may be the unknown parameters of interest. The stochastic model (assuming independent observations) would be a scaled identity matrix with variance equal to 1 (middle panel) and 3 (bottom panel), respectively. The signal of interest has been entirely hidden in the background noise in the bottom panel. {ref}`psd` can be used to detect the frequency.
 
 ```{figure} ./figs/signal_noise.png
 :name: signal_noise
@@ -87,19 +28,27 @@ The example in {numref}`signal_noise` shows that the *signal* can be described b
 Example of a time series (top graph) affected by noise with different strengths (middle and bottom figures). Note the different scales on the vertical axes.
 ```
 
-### Prediction, filtering and smoothing
+#### Signal to noise ratio
+In signal processing the signal to noise ratio is commonly used to report on the amount of noise present in the model. If we analyze the model $Y = signal + noise$, then Y is a random variable with $E[Y] = E[signal] = \mu$, and its distribution $D(Y) = D(noise) = \sigma^2$. Using this the signal to noise ratio is often defined as:
 
-Time series analysis can have two main goals:
+$$ SNR = \frac{\mu}{\sigma}$$
+or alternatively as:
+$$ SNR = \frac{\mu^2}{\sigma^2}$$
 
-* To explain the *past* and *present* state of a process:
-identifying the nature of the phenomenon represented by the time series data to study long term
-trend, seasonality and noise process of the time series
+## Different types of noise
+In the ideal case when the signal is removed, you are left when white noise. A white noise stochastic model has the following properties:
+$$
+\mathbb{E}(Y) =  \mathbb{E} \left[\begin{array}{c} y_1 \\ y_2 \\ \vdots \\ y_m \end{array}\right] = \left[\begin{array}{c} 0 \\ 0 \\ \vdots \\ 0 \end{array}\right]
+$$
 
-* To use the past data for predicting *future* values: prediction or forecasting uses the past observed values of the time series, try to model, and
-hence predict future time series values. Think of forecasting sales of a particular product,
-forecasting of stock price, or weather forecasting.
+and 
 
-Estimating a state in the past and future is referred to as *smoothing* and *filtering*, respectively.
+$$
+\mathbb{D}(Y) =  \Sigma_{Y} = \sigma^2 \left[\begin{array}{ccc} 1 & 0 & \ldots{} & 0 \\ 0 & 1 & \ldots{} & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \ldots{} & 1 \end{array}\right]
+$$
+Most notably, all observations are uncorrelated (off-diagonal elements of the covariance matrix are equal to 0). When we compute the PSD, ## add ref to psd chapter## the resulting density will be flat over the entire range of frequencies. In other words, a white noise process has equal energy over all frequencies, just like white light.
 
+### Colored noise
+In time series however, it is not guarantied that the individual observations are uncorrelated.  
 
-![prediction](./figs/prediction.png "prediction")
+#ToDo add plot where you can choose different noise models

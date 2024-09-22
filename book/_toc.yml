@@ -7,12 +7,8 @@ parts:
     - file: time_series/intro.md
       title: Time Series Analysis
       sections:
-      - file: time_series/test.ipynb
-        title: 'test'
       - file: time_series/intro_graph.ipynb
         title: 'intro graph'
-      - file: time_series/components
-        title: "Time Series components"
         sections:
         - file: time_series/exercise1.ipynb
       - file: time_series/types
