@@ -118,10 +118,6 @@ $$
 Here we use capitals for $\hat{C}_{\tau}$ and $\hat{R}_{\tau}$ since **estimators** are always a function of the random observables $S_t$.
 ```
 
-```{note}
-Software tools may have implemented one or both methods to choose from, so if possible good to check!
-```
-
 ### Covariance matrix based on autocovariance
 
 The structure of a covariance matrix for a stationary time series is purely symmetric and it looks like
@@ -135,9 +131,6 @@ c_2 & c_1 & \sigma^2 &  \ddots & c_2  \\
 
 There are $m$ (co)variance components - **one** variance component, $\sigma^2 = c_0$, and $m-1$ covariance components, $c_i$.
 
-```{note}
-The covariance matrix $\Sigma_{S}$ has constant values along the top-left to bottom-right diagonal and is called a _Toeplitz matrix._
-```
 
 (NACF)=
 ## Normalized ACF
