@@ -25,8 +25,8 @@ parts:
         title: "Autocovariance function (ACF)"
         sections:
         - file: time_series/exercise4.ipynb
-      - file: time_series/arma
-        title: "AutoRegressive Moving Average (ARMA) process"
+      - file: time_series/ar.ipynb
+        title: "AutoRegressive (AR) process"
         sections:
         - file: time_series/exercise5.ipynb
       - file: time_series/forecasting

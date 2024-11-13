@@ -263,9 +263,9 @@ $$
 ```
 :::
 
-## Power spectral density
+<!-- ## Power spectral density
 
-The power spectral density (PSD) explains how the power (variance) of the signal is distributed over different frequencies. For instance, the PSD of a pure sine wave is flat *except* at its constituent frequency, where it will show a peak. Purely random noise has a flat power spectrum, indicating that all frequencies have an identical contribution to the variance of the signal!
+The power spectral density (PSD) explains how the power (variance) of the signal is distributed over different frequencies. For instance, the PSD of a pure sine wave is flat *except* at its constituent frequency, where it will show a peak. Purely random noise has a flat power spectrum, indicating that all frequencies have an identical contribution to the variance of the signal! -->
 
 <!-- The power spectral density (PSD) explains how the power (variance) of the signal is distributed over different frequencies. For instance, the PSD of a pure sine wave is flat *except* at its constituent frequency, where it will show a peak. Purely random noise has a flat power spectrum, indicating that all frequencies have an identical contribution to the variance of the signal!
 
