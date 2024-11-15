@@ -135,11 +135,11 @@ Later in this section we will see how the coefficient $\beta$ can be estimated.
 
 **Simulated example**
 
-## Estimation of coefficients of ARMA process
+## Estimation of coefficients of AR process
 
-If the values of $p$ and $q$ of the ARMA($p,q$) process are known, the question is: **how can we estimate the coefficients $\beta_1,...,\beta_p$ and $\theta_1,...,\theta_q$?**
+If the values of $p$ of the AR($p$) process is known, the question is: **how can we estimate the coefficients $\beta_1,...,\beta_p$?**
 
-Here, we only elaborate on AR(2) = ARMA(2,0) using best linear unbiased estimation (BLUE) to estimate $\beta_1$ and $\beta_2$. The method can be generalized to estimate the parameters of an ARMA($p,q$) process.
+Here, we only elaborate on AR(2) using best linear unbiased estimation (BLUE) to estimate $\beta_1$ and $\beta_2$. The method can be generalized to estimate the parameters of an AR($p$) process.
 
 **Example: Parameter estimation of AR(2)**
 
@@ -147,7 +147,7 @@ The AR(2) process is of the form
 
 $$S_t=\beta_1 S_{t-1}+\beta_2 S_{t-2}+e_t$$
 
-In order to esitimate the $\beta_i$ we can set up the following linear model of observation equations (starting from $t=3$):
+In order to estimate the $\beta_i$ we can set up the following linear model of observation equations (starting from $t=3$):
 
 $$\begin{bmatrix}S_3 \\ S_4 \\ \vdots \\ S_m \end{bmatrix} = \begin{bmatrix}S_2 & S_1 \\S_3 & S_2\\ \vdots & \vdots\\ S_{m-1}&S_{m-2} \end{bmatrix}\begin{bmatrix}\beta_1 \\ \beta_2\end{bmatrix} + \begin{bmatrix}e_{3} \\ e_{4}\\ \vdots \\ e_{m} \end{bmatrix}$$
 
@@ -156,102 +156,6 @@ The BLUE estimator of $\beta=[\beta_1,\beta_2]^T$ is
 $$\hat{\beta}=(\mathrm{A}^T\mathrm{A})^{-1}\mathrm{A}^TS$$
 
 
-## Worked example - Single Differencing
+where $\mathrm{A}=\begin{bmatrix}S_2 & S_1 \\S_3 & S_2\\ \vdots & \vdots\\ S_{m-1}&S_{m-2} \end{bmatrix}$ and $S=\begin{bmatrix}S_3 \\ S_4 \\ \vdots \\ S_m \end{bmatrix}$.
 
-On this worked example, we will show that [single differencing](SD) induces an MA(1) process. The original time series is given as:
-
-$$Y=\begin{bmatrix}Y_1\\ Y_2\\ \vdots \\ Y_m\end{bmatrix}, \hspace{10px} \Sigma_{Y}=\sigma^2 I_m$$
-
-We apply single differencing which in this case results in a purely random process:
-
-$$\begin{cases}S_1 = \Delta Y_1 = Y_1\\ S_2=\Delta Y_2 = Y_2 - Y_1\\ S_3=\Delta Y_3 = Y_3-Y_2\\ \quad\vdots \\ S_m= \Delta Y_m = Y_m - Y_{m-1}\end{cases}$$
-
-In matrix notation, this can be written as:
-
-$$\begin{bmatrix} S_1\\  S_2\\ \vdots \\  S_m\end{bmatrix} = \underbrace{\begin{bmatrix}
-    1 & 0 &   & \dots & 0\\
-    -1 & 1 & 0 &   &  \\
-    0 & -1 & 1 & \ddots & \\
-    \vdots & \ddots &\ddots & \ddots & 0 \\
-    0 & \dots & 0 & -1 & 1
-\end{bmatrix}}_{\mathrm{T}}\begin{bmatrix}Y_1\\ Y_2\\ \vdots \\ Y_m\end{bmatrix} \Longleftrightarrow S = \mathrm{T}Y$$
-
-We apply the [variance propagation law](01_LinearProp):
-
-$$\Sigma_{ S}=\mathrm{T}\Sigma_{Y}\mathrm{T}^T = \mathrm{T}\sigma^2I_m\mathrm{T}^T=\sigma^2\mathrm{TT}^T$$
-
-such that we obtain:
-
-$$\Sigma_{S} = \sigma^2\mathrm{TT}^T = 2\sigma^2\begin{bmatrix}1&-0.5&0&\dots&0\\ -0.5&1&-0.5& &\\ 0&-0.5&1&\ddots&0\\ \vdots& &\ddots&\ddots&-0.5\\ 0&\dots&0&-0.5&1\end{bmatrix}$$
-
-We can see that the structure indeed corresponds with the covariance matrix of an AR(1) process, from which we see that $\rho_1=-0.5$. Now we can find the value of $\theta$: 
-
-$$\begin{cases}\rho_1=-0.5=\frac{\theta}{1+\theta^2}\\  S_t = \theta e_{t-1}+e_t\end{cases}\implies \theta=-1 \implies S_t = e_t-e_{t-1}$$
-
-:::{card} Exercise
-
-For the stationary AR(2) process, calculate the ACF at lag 1. In other words, calculate $\rho_1$.
-
-```{admonition} Solution
-:class: tip, dropdown
-
-For the AR($p$) process we know that $\mathbb{E}(S_t)=0$, and $Var(S_t)=\sigma^2$ ($\forall t$), and
-
-$$S_t = \beta_1S_{t-1}+\beta_2S_{t-2}+e_t=
-\begin{bmatrix}\beta_1 & \beta_2 & 1\end{bmatrix}\begin{bmatrix}S_{t-1} \\ S_{t-2} \\ e_t\end{bmatrix}$$
-
-To compute the autocovariance function at lag 1, $c_1$, we need to compute the covariance between $S_{t-1}$ and $S_t$, which is given as
-
-$$
-\begin{align*}
-c_1 &= \mathbb{E}(S_{t-1}S_t)
-= \mathbb{E}\left(S_{t-1}
-(\beta_1 S_{t-1} + \beta_2 S_{t-2} + e_t)
-\right)
-\\
-&= \beta_1 \mathbb{E}(S_{t-1}^2)
-+ \beta_2 \mathbb{E}(S_{t-2}S_{t-1})
-+ \mathbb{E}(S_{t-1}e_t)\\
-&= \beta_1 \sigma^2
-+ \beta_2 c_1
-\end{align*}$$
-
-
-which gives
-
-$$
-\beta_1 \sigma^2 = c_1(1-\beta_2)
-$$
-
-or, because $\rho_1=c_1/\sigma^2$:
-
-$$
-\rho_1=\frac{\beta_1}{1-\beta_2}
-$$
-
-```
-:::
-
-## Brief Summary
-
-The random processes (noise processes) considered here are:
-
-* ARMA($p,q$) process
-
-$$
-S_t = \sum_{i=1}^p \beta_iS_{t-i}+e_t+\sum_{i=1}^q\theta_ie_{t-1}
-$$
-
-* AR($p$) process
-
-$$
-S_t = \sum_{i=1}^p \beta_iS_{t-i}+e_t
-$$
-
-* MA($q$) process
-
-$$
-S_t = e_t+\sum_{i=1}^q\theta_ie_{t-1}
-$$
-
-The parameters of these stochastic processes can be estimated using the least-squares method. This allows then to predict the stochastic process, needed for [forecasting](forecast).
+Notice that S and A are vectors of length $(m-2)$ and $(m-2\times 2)$, respectively.
