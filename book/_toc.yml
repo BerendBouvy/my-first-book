@@ -16,7 +16,7 @@ parts:
       - file: time_series/modelling
         title: "Time Series modelling and estimation"
         sections:
-        - file: time_series/exercise3.ipynb
+        - file: time_series/fit_BLUE.ipynb
       - file: time_series/stationarity
         title: "Stationarity"
       - file: time_series/acf
