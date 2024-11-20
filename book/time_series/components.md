@@ -73,7 +73,7 @@ Once $\omega_ 0$ is set, the coefficients $a_k $ and $b_k$ can be determined usi
 
 $$ A_k = \sqrt{a_k^2 + b_k^2}, \hspace{1cm} \theta_k = \arctan(-\frac{b_k}{a_k}), \hspace{1cm} k = 1, \ldots{}, p $$
 
-```note
+```{note}
 This transformation is necessary to make the seasonal component phase-independent. Using regular estimation methods, we cannot linearly estimate the phase of the sinusoidal function. However by transforming the sinusoidal function into a linear combination of sine and cosine functions, we can estimate the phase of the seasonal component.
 ```
 
@@ -207,5 +207,6 @@ where
 - $a$ and $b$ are the coefficients of the signal, (e.g. annual signal)
 - $\omega_0$ is the frequency (e.g. 1 cycle/year)
 - $o$ is the offset starting at time $t_k$
+- $u_k(t)$ is the Heaviside step function
 - $\epsilon(t)$ is the i.i.d. random Gaussian noise, i.e. $\epsilon(t) \sim \textbf{N}(0, \sigma^2)$.
 :::
