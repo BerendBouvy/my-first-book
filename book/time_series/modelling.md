@@ -4,16 +4,16 @@
 The goal is now to:
 
 * estimate parameters of interest (i.e., components of time series) using **Best Linear Unbiased Estimation (BLUE)**;
-* evaluate the confidence intervals of parameters of interest;
+* evaluate the confidence intervals of the estimators for the parameters of interest;
 
 ## Components of time series
 
 As already discussed, we will distinguish the following components in a time series:
 
 * **Trend:** General behavior and variation of the process. This often is a linear trend with an unknown intercept $y_0$ and a rate $r$.
-* **Seasonality:** Regular seasonal variations, which can be expressed as sine functions with (un)known frequency $\omega$, and unknown amplitude $A$ and phase $\theta$, or with unknowns $a(=A\sin\theta)$ and $b(=A\cos\theta)$, see [example](season).
+* **Seasonality:** Regular seasonal variations, which can be expressed as sine functions with (un)known frequency $\omega$, and unknown amplitude $A$ and phase $\theta$, or with unknowns $a(=A\sin\theta)$ and $b(=A\cos\theta)$.
 * **Offset:** A jump of size $o$ in a time series starting at epoch $t_k$.
-* **Noise:** White or colored noise (e.g., ARMA process).
+* **Noise:** White or colored noise (e.g., AR process).
 
 ## Best Linear Unbiased Estimation (BLUE)
 
@@ -168,4 +168,6 @@ where $|Y(\omega)|$ is the magnitude at the frequency $\omega$. If a significant
 
 Left: time series (grey) and estimated linear trend and sine wave with period of 100. Right: estimated PSD.
 ```
+This means we can estimate the frequency $\omega$ of the periodic pattern using the techniques discussed in the chapter on signal processing. Once we have the frequency, we can construct the design matrix $\mathrm{A}$. 
 
+It is also possible to infer the frequency of the periodic pattern by reasoning. For example, if we know our model depends on temperature, we can assume that the frequency of the seasonal pattern is related to the temperature cycle (e.g., 24 hours). However, this is a more qualitative approach and should be used with caution. Best practice is to use the DFT or PSD to estimate the frequency.
